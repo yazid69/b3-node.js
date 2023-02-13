@@ -9,6 +9,13 @@ import { postLogin } from "./routes/postLogin";
 import { authenticationMiddleware } from "./middlewares/authenticationMiddleware";
 import { getRegister } from "./routes/getRegister";
 import { postRegister } from "./routes/postRegister";
+import { deleteUser } from "./repositories/userRepository";
+import { postProfile } from "./routes/postProfile";
+import { getProfile } from "./routes/getProfile";
+import { getLogout } from "./routes/getLogout";
+import { getChat } from "./routes/getChat";
+import { updateUser } from "./repositories/userRepository";
+
 
 const SECRET_KEY = 'MySecretKeyIsAwesome';
 
@@ -23,15 +30,22 @@ function main() {
   })
   app.use(cookieParser(SECRET_KEY))
   app.use(express.static(path.join(__dirname, '../public')))
-  
+
   getRegister(app)
   postRegister(app)
   getLogin(app)
   postLogin(app)
 
+
   app.use(authenticationMiddleware)
-  getRoot(app)
+  getLogout(app)
+  getChat(app)
+  getProfile(app)
+  postProfile(app)
+  updateUser(app)
+  deleteUser(app)
   getWs(app, sockets)
+  getRoot(app)
 
   app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(error)
@@ -39,7 +53,7 @@ function main() {
 
     next()
   })
-  
+
   app.listen(3000, () => {
     console.log('Example app listening on port 3000!');
   });

@@ -2,8 +2,7 @@ const messageList = document.getElementById('message-list');
 const chatStatus = document.getElementById('chat-status');
 
 function addMessage(message) {
-  const messageElement = document
-    .createElement('div');
+  const messageElement = document.createElement('p');
   messageElement.textContent = message;
   messageList.appendChild(messageElement);
 }
@@ -23,27 +22,21 @@ function connect() {
     setTimeout(connect, 1000);
   };
 
-  ws.onerror = (error) => {
-    console.log('Error', error);
-  };
-
   ws.onmessage = (event) => {
     console.log('Message from server', event.data);
-    const {type, data} = JSON.parse(event.data);
-    if (data.type == 'reply') {
-        addMessage(data.user.name + ': ' + event.data.msg);
+    const { type, data } = JSON.parse(event.data);
+    if (type === 'reply') {
+      addMessage(data.user.name, data.msg);
     }
   };
 }
 
-connect()
+connect();
 
-document.querySelector('form')
-  .addEventListener('submit', (e) => {
-    e.preventDefault();
-    const input = document
-      .querySelector('#chat-input');
-    //addMessage(input.value);
-    ws.send(input.value);
-    input.value = '';
-  });
+document.querySelector('form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const input = document.querySelector('#chat-input');
+  // addMessage(input.value);
+  ws.send(input.value);
+  input.value = '';
+})

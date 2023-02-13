@@ -16,4 +16,14 @@ model User {
   name     String
   create   DateTime @default(now())
   updateAt DateTime @updatedAt
+  Post     Post[]
+}
+
+model Post {
+  content   String?
+  userId    String   @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
 }

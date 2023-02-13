@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat app</title>
+    <title>Mon App</title>
 </head>
-<body>
-    <h1>My chat app</h1>
-    <i id="chat-status"></i>
-    <div id="message-list"></div>
-    <form>
-        <input type="text" id="chat-input">
-        <button type="submit">Send</button>
-        <button type="register">S'enregistrer</button>
 
-    </form>
-    <style>
-        #chat-status {
-            display: block;
-            border-radius: 50%;
-            width: 10px;
-            height: 10px;
-          }
-    </style>
-    <script src="client.js"></script>
-        </body>
-        </html>
+<body>
+    <div class="container">
+        <h1>Bienvenue sur Notre App !</h1>
+        <div class="btn-container">
+            <a href="/update"><button type="submit" class="btn">modify info</button></a>
+            <a href="/chat"><button type="submit" class="btn">chat</button></a>
+            <a href="/delete"><button type="submit" class="btn">delete profile</button></a>
+            <a href="/logout"><button type="submit" class="btn">log out</button></a>
+        </div>
+    </div>
+
+</body>
+
+</html>
